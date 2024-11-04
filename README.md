@@ -44,7 +44,7 @@ TODO:
 
 ## Enclosure
 
-An enclosure for the pcb, microcontroller module, and a 7-chip [LuxeonStar](https://luxeonstar.com/) LED module was designed in [OpenSCAD](https://www.openscad.org/). The LEDs illuminate a large [selenite](https://en.wikipedia.org/wiki/Selenite_(mineral)) tower crystal. The LED module that I used had the following chips [custom-mounted to a 40mm round FR4 Coolbase board](https://luxeonstar.com/product/sp-02/):
+An [enclosure](enclosure/) for the pcb, microcontroller module, and a 7-chip [LuxeonStar](https://luxeonstar.com/) LED module was designed in [OpenSCAD](https://www.openscad.org/). The LEDs illuminate a large [selenite](https://en.wikipedia.org/wiki/Selenite_(mineral)) tower crystal. The LED module that I used had the following chips [custom-mounted to a 40mm round FR4 Coolbase board](https://luxeonstar.com/product/sp-02/):
  * Royal-Blue - 1030 mW (LXML-PR02-A900)
  * Blue - 74 lm (LXML-PB02)
  * Cyan - 122 lm (LXML-PE01-0070)
@@ -54,5 +54,3 @@ An enclosure for the pcb, microcontroller module, and a 7-chip [LuxeonStar](http
  * Deep Red - 655nm/640 mW (LXM3-PD01)
 
 The LEDs were diffused with a [Polymer Optics 12° 39 mm Circular Beam Diffused Optic](https://luxeonstar.com/product/264/).
-
-![Enclosure](hardware/glowstick_enclosure.stl)

@@ -1,6 +1,6 @@
 # glowstick
 
-An 8-channel high power LED driver for light-art projects. 
+An 8-channel high power LED driver for light-art projects. This work was inspired by a [project](https://github.com/rfdougherty/ledFlicker) that I built many years ago to do visual experiments in an MRI scanner. Some [old python code from that work](https://github.com/vistalab/vistadisp/tree/master/ledFlicker/python) might be useful. E.g., here's [code](https://github.com/vistalab/vistadisp/blob/master/ledFlicker/python/ledFlickComputeXform.py) to compute human cone LMS stimulation from LED color power spectra.
 
 ![Glowstick](enclosure/glowstick.png)
 
@@ -16,21 +16,31 @@ The schematic and layout was designed in [EasyEDA](https://easyeda.com/) and the
 ![Schematic](hardware/glowstick_schematic.svg)
 ![Layout](hardware/glowstick_layout.svg)
 
+The circuit includes a voltage regulator so a microcontroller can be powered by the LED supply. If you use a 5V supply and your microcontroller has a 5V input, then you can omit the voltage regulator and just add a bypass wire. Or, you could populate it with a 3.3V regulator if your input supply is less than 5V but greater than 3.3V. Also, as noted above, the power dissipation of the MOSFETs is affected by the voltage difference between the source supply and the LED forward voltage. So you could make it more efficient by using a supply that is closer to the maximum LED forward voltage. Just be sure to account for the 0.5V dropout in the circuit. E.g., if you are using LEDs with a Vf of no more than 3.2V, then you could use a 3.7V supply to get the best efficiency.
+
+I used a [Wemos S3 Mini](https://www.wemos.cc/en/latest/s3/s3_mini.html) for the microcontroller.
+
 ## Firmware
 
 The firmware is written in C/C++ using [Arduino](https://www.arduino.cc/) and the [aWOT framework](https://github.com/rbaron/aWOT). Note that I used a 7-LED module for my build, so the firmware currently only supports 7 channels. If you do use the 8th channel, you will need to update the firmware.
 
-The API includes the following endpoints:
+The code runs a web server with the following API endpoints:
 
-- `GET /config` - Retrieve current configuration as JSON
-- `POST /config` - Update configuration (expects JSON payload)
-- `GET /leds` - Get current LED values for all 7 channels
-- `PUT /leds/:l0/:l1/:l2/:l3/:l4/:l5/:l6` - Set LED values (0-255 for each channel)
-- `PUT /iscale/:v` - Set intensity scale (0.0-1.0)
+- `GET /config` - Retrieve the current configuration as JSON
+- `POST /config` - Update the configuration (expects JSON payload)
+- `GET /leds` - Get the current LED PWM values for all 7 channels
+- `PUT /leds/:l0/:l1/:l2/:l3/:l4/:l5/:l6` - Set the LED PWM values (0-255 for each channel)
+- `PUT /iscale/:v` - Set the intensity scale (0.0-1.0)
 - `PUT /mod/:amp/:step` - Set modulation parameters (amplitude and step, 0.0-1.0)
 - `PUT /update/:v` - Set update interval (10-9999999 microseconds)
 - `GET /sensors` - Get sensor data (temperature, time, LED states)
 - `GET /reboot` - Trigger system reboot
+
+TODO:
+- Add a web GUI to allow easy configuration
+- MQTT support
+- Add timer functions, including sunrise/sunset support
+- Add LED spectra (measured or from the datasheet) and allow HSV color control
 
 ## Enclosure
 

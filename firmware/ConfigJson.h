@@ -127,8 +127,8 @@ class ConfigJson {
 
     void set_defaults() {
       iscale = 1.0; // 0-1, applies a global intenstiry scale factor to LED PWM values
-      mod_amp = 0.2; // 0-1, random modulation proportion
-      mod_step = 0.05; // 0-1, random modulation step size proportion
+      mod_amp = 0.0; // 0-1, random modulation proportion
+      mod_step = 0.0; // 0-1, random modulation step size proportion
       update_us = 2000;
       temp_max = 5000; // millivolts, turn off all leds if temp mv is >= this
       for (uint8_t i; i<7; i++) led_init.raw[i] = 0;

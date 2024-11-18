@@ -166,6 +166,9 @@ void loop() {
 // Random-walk modulation
 float getRandomModulation(float mod, float step, uint8_t i) {
     static float offsets[7] = {0,0,0,0,0,0,0};
+    static float prev_mod = 0;
+    if(mod != prev_mod)
+      offsets[i] = 0;
     offsets[i] += constrain(random(-step*1000, step*1000 + 1) / 1000.0, -mod, mod);
     return offsets[i];
 }
